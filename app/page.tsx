@@ -1,3 +1,5 @@
+import Nav from "@/components/navigation/Nav";
+
 export default async function Home() {
   return (
     <main>
