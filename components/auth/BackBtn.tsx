@@ -11,7 +11,7 @@ export default function BackBtn({
   label: string;
 }) {
   return (
-    <Button variant={"link"} className=" font-medium w-full">
+    <Button asChild variant={"secondary"} className=" font-medium w-full">
       <Link aria-label={label} href={href}>
         {label}
       </Link>
