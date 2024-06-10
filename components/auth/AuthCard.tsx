@@ -14,7 +14,7 @@ interface CardWrapperProps {
   cardTitle: string;
   backBtnHref: string;
   backBtnLabel: string;
-  showSocials: boolean;
+  showSocials?: boolean;
 }
 
 export default function AuthCard({

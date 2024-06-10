@@ -12,21 +12,21 @@ import {
 } from "@/components/ui/form";
 import AuthCard from "./AuthCard";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginSchema } from "@/types/login-schema";
 import * as z from "zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { emailSignIn } from "@/server/actions/email-signin";
 import { useAction } from "next-safe-action/hooks";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import FormSuccess from "./FormSuccess";
+import { ResetSchema } from "@/types/reset-schema";
+import { resetPassword } from "@/server/actions/password-reset";
 import FormError from "./FormError";
 
-export default function LoginForm() {
+export default function ResetForm() {
   const form = useForm({
-    resolver: zodResolver(LoginSchema),
+    resolver: zodResolver(ResetSchema),
     defaultValues: {
       email: "",
       password: "",
@@ -35,22 +35,22 @@ export default function LoginForm() {
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const { execute, status, result } = useAction(emailSignIn, {
+  const { execute, status } = useAction(resetPassword, {
     onSuccess(data) {
       if (data?.error) setError(data.error);
       if (data?.success) setSuccess(data.success);
     },
   });
 
-  const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+  const onSubmit = (values: z.infer<typeof ResetSchema>) => {
     execute(values);
   };
 
   return (
     <AuthCard
-      cardTitle="Welcome back!"
-      backBtnHref="/auth/register"
-      backBtnLabel="Create a new account"
+      cardTitle="Forgot your password?"
+      backBtnHref="/auth/login"
+      backBtnLabel="Back to login"
       showSocials
     >
       <div>
@@ -66,29 +66,10 @@ export default function LoginForm() {
                     <FormControl>
                       <Input
                         {...field}
-                        placeholder="Enter Email Address"
+                        placeholder="Enter your Email"
                         type="email"
                         autoComplete="email"
-                      />
-                    </FormControl>
-                    <FormDescription />
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Password</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        placeholder="********"
-                        type="password"
-                        autoComplete="current-password"
+                        disabled={status === "executing"}
                       />
                     </FormControl>
                     <FormDescription />
@@ -110,7 +91,7 @@ export default function LoginForm() {
                 status === "executing" ? "animate-pulse" : ""
               )}
             >
-              {"LOGIN"}
+              Reset Password
             </Button>
           </form>
         </Form>
