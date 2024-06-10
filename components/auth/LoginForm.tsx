@@ -98,7 +98,7 @@ export default function LoginForm() {
               />
               <FormSuccess message={success} />
               <FormError message={error} />
-              <Button size={"sm"} variant={"link"} asChild>
+              <Button className="px-0" size={"sm"} variant={"link"} asChild>
                 <Link href={"/auth/reset"}>Forgot your password</Link>
               </Button>
             </div>
