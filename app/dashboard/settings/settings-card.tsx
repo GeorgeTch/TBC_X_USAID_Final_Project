@@ -31,10 +31,10 @@ import Image from "next/image";
 import FormError from "@/components/auth/FormError";
 import FormSuccess from "@/components/auth/FormSuccess";
 import { Switch } from "@/components/ui/switch";
-import { error } from "console";
 import { useState } from "react";
 import { useAction } from "next-safe-action/hooks";
 import { settings } from "@/server/actions/settings";
+import { UploadButton } from "@/app/api/uploadthing/upload";
 
 export default function SettingsCard({ session }: { session: Session }) {
   const [error, setError] = useState("");
@@ -120,6 +120,40 @@ export default function SettingsCard({ session }: { session: Session }) {
                         alt="User Image"
                       />
                     )}
+                    <UploadButton
+                      className="scale-75   ut-label:bg-red-50  ut-button:bg-default/75  hover:ut-button:bg-primary-foreground ut:button:transition-all ut-button:duration-500 "
+                      endpoint="avatarUploader"
+                      onUploadBegin={() => {
+                        setAvatarUploading(true);
+                      }}
+                      onUploadError={(error) => {
+                        form.setError("image", {
+                          type: "validate",
+                          message: error.message,
+                        });
+                        setAvatarUploading(false);
+                        return;
+                      }}
+                      onClientUploadComplete={(res: any) => {
+                        form.setValue(
+                          "image",
+                          (res[0] as { url: string }).url!
+                        );
+                        setAvatarUploading(false);
+                        return;
+                      }}
+                      content={{
+                        button({ ready }) {
+                          if (ready)
+                            return (
+                              <div className="hover:text-primary">
+                                Change Avatar
+                              </div>
+                            );
+                          return <div>Uploading</div>;
+                        },
+                      }}
+                    />
                   </div>
                   <FormControl>
                     <Input

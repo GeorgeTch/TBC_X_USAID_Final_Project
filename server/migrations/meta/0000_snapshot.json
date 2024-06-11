@@ -1,5 +1,5 @@
 {
-  "id": "b50ba983-59f2-49f9-9c49-20b88293d8b5",
+  "id": "f496a0f4-bdff-4b1a-acf0-4a1fcd233ac2",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -213,10 +213,30 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true
+        },
+        "userId": {
+          "name": "userId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "two_factor_tokens_userId_user_id_fk": {
+          "name": "two_factor_tokens_userId_user_id_fk",
+          "tableFrom": "two_factor_tokens",
+          "tableTo": "user",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {
         "two_factor_tokens_id_token_pk": {
           "name": "two_factor_tokens_id_token_pk",

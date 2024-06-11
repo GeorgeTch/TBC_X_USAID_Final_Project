@@ -100,6 +100,7 @@ export const twoFactorTokens = pgTable(
     token: text("token").notNull(),
     expires: timestamp("expires", { mode: "date" }).notNull(),
     email: text("email").notNull(),
+    userId: text("userId").references(() => users.id, { onDelete: "cascade" }),
   },
   (verificationToken) => ({
     compoundKey: primaryKey({
