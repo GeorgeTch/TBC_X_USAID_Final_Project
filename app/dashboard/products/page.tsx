@@ -3,9 +3,13 @@ import placeholder from "@/public/image-placeholder.jpg";
 import React from "react";
 import { DataTable } from "./data-table";
 import { columns } from "./columns";
+import { variantImages } from "@/server/schema";
 
 export default async function Products() {
   const products = await db.query.products.findMany({
+    with: {
+      productVariants: { with: { variantImages: true, variantTags: true } },
+    },
     orderBy: (products, { desc }) => [desc(products.id)],
   });
   if (!products) throw new Error("No products found");
