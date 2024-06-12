@@ -12,6 +12,7 @@ import {
   Strikethrough,
 } from "lucide-react";
 import { useFormContext } from "react-hook-form";
+import { useEffect } from "react";
 
 const Tiptap = ({ textValue }: { textValue: string }) => {
   const { setValue } = useFormContext();
@@ -54,6 +55,11 @@ const Tiptap = ({ textValue }: { textValue: string }) => {
       },
     },
   });
+
+  //for the description autofill on edit mode
+  useEffect(() => {
+    if (editor?.isEmpty) editor.commands.setContent(textValue);
+  }, [textValue]);
 
   return (
     <div className="flex flex-col gap-2">

@@ -5,6 +5,7 @@ import { createSafeActionClient } from "next-safe-action";
 import { db } from "..";
 import { eq } from "drizzle-orm";
 import { products } from "../schema";
+import { revalidatePath } from "next/cache";
 
 const action = createSafeActionClient();
 
@@ -12,6 +13,7 @@ export const createProduct = action(
   ProductSchema,
   async ({ description, price, title, id }) => {
     try {
+      //Edit mode
       if (id) {
         const currentProduct = await db.query.products.findFirst({
           where: eq(products.id, id),
@@ -23,6 +25,7 @@ export const createProduct = action(
           .set({ description, price, title })
           .where(eq(products.id, id))
           .returning();
+        revalidatePath("/dashboard/products");
         return {
           success: `Product - ${editedProduct[0].title} has been updated`,
         };
@@ -32,6 +35,7 @@ export const createProduct = action(
           .insert(products)
           .values({ description, price, title })
           .returning();
+        revalidatePath("/dashboard/products");
 
         return {
           success: `Product - ${newProduct[0].title} has been created`,
