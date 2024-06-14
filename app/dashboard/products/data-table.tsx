@@ -131,7 +131,7 @@ export function DataTable<TData, TValue>({
               onClick={() => table.previousPage()}
             >
               <ChevronLeftIcon className="w-4 h-4" />
-              <span>Go to the previous page</span>
+              <span>Previous page</span>
             </Button>
 
             <Button
@@ -139,7 +139,7 @@ export function DataTable<TData, TValue>({
               disabled={!table.getCanNextPage()}
               onClick={() => table.nextPage()}
             >
-              <span>Go to the next page</span>
+              <span>Next page</span>
               <ChevronRightIcon className="w-4 h-4" />
             </Button>
           </div>

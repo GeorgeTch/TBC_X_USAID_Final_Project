@@ -15,14 +15,26 @@ export default async function Products() {
   if (!products) throw new Error("No products found");
 
   const dataTable = products.map((product) => {
+    if (product.productVariants.length === 0) {
+      return {
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        image: placeholder.src,
+        variants: [],
+      };
+    }
+    console.log(product.productVariants);
+    const image = product.productVariants[0].variantImages[0]?.url;
     return {
       id: product.id,
       title: product.title,
       price: product.price,
-      variants: [],
-      image: placeholder.src,
+      variants: product.productVariants,
+      image,
     };
   });
+  if (!dataTable) throw new Error("No data found");
   return (
     <div>
       <DataTable columns={columns} data={dataTable} />

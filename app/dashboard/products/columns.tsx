@@ -25,7 +25,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import ProductVariant from "./product-variant";
+import { ProductVariant } from "./product-variant";
 
 interface ProductColumn {
   title: string;
@@ -86,19 +86,19 @@ export const columns: ColumnDef<ProductColumn>[] = [
       const variants = row.getValue("variants") as VariantsWithImagesTags[];
 
       return (
-        <div>
+        <div className="flex gap-2 items-center">
           {variants.map((variant) => (
             <div key={variant.id}>
               <TooltipProvider>
                 <Tooltip>
-                  <TooltipTrigger>
+                  <TooltipTrigger asChild>
                     <ProductVariant
                       productID={variant.productID}
                       variant={variant}
                       editMode={true}
                     >
                       <div
-                        className="w-5 h-f rounded-full"
+                        className="w-5 h-5 rounded-full"
                         key={variant.id}
                         style={{ background: variant.color }}
                       ></div>
@@ -114,9 +114,9 @@ export const columns: ColumnDef<ProductColumn>[] = [
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <ProductVariant editMode={false}>
+                <ProductVariant productID={row.original.id} editMode={false}>
                   <span className="text-primary">
-                    <PlusCircle className="w-4 h-4" />
+                    <PlusCircle className="w-5 h-5" />
                   </span>
                 </ProductVariant>
               </TooltipTrigger>

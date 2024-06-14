@@ -11,7 +11,6 @@ export default function DashboardNav({
   allLinks: { label: string; path: string; icon: JSX.Element }[];
 }) {
   const pathname = usePathname();
-  console.log(pathname);
   return (
     <nav className="py-2 overflow-auto mb-4">
       <ul className="flex gap-6 text-xs font-semibold ">
