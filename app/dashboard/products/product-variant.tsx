@@ -50,7 +50,7 @@ export const ProductVariant = forwardRef<HTMLDivElement, VariantProps>(
         editMode,
         id: undefined,
         productID,
-        productType: "Black Notebook",
+        productType: "",
       },
     });
 

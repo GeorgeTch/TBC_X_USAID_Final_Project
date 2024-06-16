@@ -143,7 +143,7 @@ export default function ProductForm() {
                         type="number"
                         min={0}
                         placeholder="Your Price"
-                        step={0.1}
+                        step={0.01}
                       />
                     </div>
                   </FormControl>
