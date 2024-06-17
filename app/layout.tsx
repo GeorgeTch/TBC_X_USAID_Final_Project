@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Roboto } from "next/font/google";
 import "./globals.css";
 
-import Nav from "@/components/navigation/Nav";
+import Nav from "@/components/navigation/nav";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import Toaster from "@/components/ui/toaster";
@@ -26,7 +26,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={roboto.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="flex-grow px-6 md:px-12 max-w-7xl mx-auto">
+          <div className="flex-grow px-6 md:px-12 max-w-8xl mx-auto">
             <Nav />
             <Toaster />
             {children}
