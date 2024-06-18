@@ -5,7 +5,6 @@ import { Card, CardDescription, CardTitle } from "../ui/card";
 import Stars from "./stars";
 import { getReviewAverage } from "@/lib/review-average";
 import { useMemo } from "react";
-import { Divide } from "lucide-react";
 import { Progress } from "../ui/progress";
 
 export default function ReviewChart({
@@ -22,7 +21,6 @@ export default function ReviewChart({
         ratingValues[starIndex]++;
       }
     });
-    console.log(ratingValues, totalReviews);
     return ratingValues.map((rating) => (rating / totalReviews) * 100);
   }, [reviews]);
 

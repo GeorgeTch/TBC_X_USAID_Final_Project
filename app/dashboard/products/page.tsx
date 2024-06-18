@@ -24,7 +24,6 @@ export default async function Products() {
         variants: [],
       };
     }
-    console.log(product.productVariants);
     const image = product.productVariants[0].variantImages[0]?.url;
     return {
       id: product.id,
