@@ -17,7 +17,7 @@ export default function Payment() {
   const totalPrice = cart.reduce((acc, item) => {
     return acc + item.price * item.variant.quantity;
   }, 0);
-  console.log(totalPrice);
+
   return (
     <motion.div className="max-w-2xl mx-auto">
       <Elements

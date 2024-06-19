@@ -10,13 +10,13 @@ const action = createSafeActionClient();
 
 export const createOrder = action(
   createOrderSchema,
-  async ({ products, status, total }) => {
+  async ({ products, status, total, paymentIntentID }) => {
     const user = await auth();
     if (!user) return { error: "User not found" };
 
     const order = await db
       .insert(orders)
-      .values({ status, total, userID: user.user.id })
+      .values({ status, total, userID: user.user.id, paymentIntentID })
       .returning();
 
     const orderProducts = products.map(
