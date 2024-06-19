@@ -20,8 +20,11 @@ export type CartState = {
   setCheckoutProgress: (
     value: "cart-page" | "payment-page" | "confirmation-page"
   ) => void;
+  clearCart: () => void;
   addToCart: (item: CartItem) => void;
   removeFromCart: (item: CartItem) => void;
+  cartDrawerOpen: boolean;
+  setCartDrawerOpen: (value: boolean) => void;
 };
 
 export const useCartStore = create<CartState>()(
@@ -29,8 +32,15 @@ export const useCartStore = create<CartState>()(
     (set) => ({
       cart: [],
       checkoutProgress: "cart-page",
+      cartDrawerOpen: false,
+
+      setCartDrawerOpen: (value) => set({ cartDrawerOpen: value }),
+
       setCheckoutProgress: (value) =>
         set((state) => ({ checkoutProgress: value })),
+
+      clearCart: () => set({ cart: [] }),
+
       addToCart: (item) =>
         set((state) => {
           const existingItem = state.cart.find(

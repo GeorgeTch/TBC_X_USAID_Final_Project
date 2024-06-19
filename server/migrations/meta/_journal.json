@@ -29,6 +29,13 @@
       "when": 1718700952847,
       "tag": "0003_wooden_dragon_lord",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1718712398459,
+      "tag": "0004_wise_wither",
+      "breakpoints": true
     }
   ]
 }

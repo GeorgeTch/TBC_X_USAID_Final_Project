@@ -5,10 +5,13 @@ import getStripe from "@/lib/get-stripe";
 import { motion } from "framer-motion";
 import { Elements } from "@stripe/react-stripe-js";
 import PaymentForm from "./payment-form";
+import { useTheme } from "next-themes";
 
 const stripe = getStripe();
 
 export default function Payment() {
+  const { theme } = useTheme();
+
   const { cart } = useCartStore();
 
   const totalPrice = cart.reduce((acc, item) => {
@@ -16,13 +19,14 @@ export default function Payment() {
   }, 0);
   console.log(totalPrice);
   return (
-    <motion.div>
+    <motion.div className="max-w-2xl mx-auto">
       <Elements
         stripe={stripe}
         options={{
           mode: "payment",
           currency: "usd",
           amount: totalPrice * 100,
+          appearance: { theme: theme === "dark" ? "night" : "flat" },
         }}
       >
         <PaymentForm totalPrice={totalPrice} />

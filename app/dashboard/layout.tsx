@@ -1,4 +1,4 @@
-import DashboardNav from "@/components/navigation/DashboardNav";
+import DashboardNav from "@/components/navigation/dashboard-nav";
 import { auth } from "@/server/auth";
 import { BarChart, Package, PenSquare, Settings, Truck } from "lucide-react";
 

@@ -11,6 +11,8 @@ import { getReviewAverage } from "@/lib/review-average";
 import Stars from "@/components/reviews/stars";
 import AddToCart from "@/components/cart/add-to-cart";
 
+export const revalidate = 60;
+
 export async function generateStaticParams() {
   const data = await db.query.productVariants.findMany({
     with: {

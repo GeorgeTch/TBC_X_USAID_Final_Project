@@ -52,7 +52,7 @@ export default function CartItems() {
           </div>
         )}
         {cart.length > 0 && (
-          <div className="w-full h-88 overflow-y-auto">
+          <div className="w-full max-h-80 overflow-y-auto">
             <Table className="max-w-2xl mx-auto">
               <TableHeader>
                 <TableRow>
