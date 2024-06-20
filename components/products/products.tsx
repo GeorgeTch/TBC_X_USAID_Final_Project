@@ -1,18 +1,33 @@
 "use client";
+
 import formatPrice from "@/lib/format-price";
 import { VariantsWithProduct } from "@/lib/infer-type";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { useMemo } from "react";
 
 type ProductsType = {
   variants: VariantsWithProduct[];
 };
 
 export default function Products({ variants }: ProductsType) {
+  const searchParams = useSearchParams();
+  const searchTag = searchParams.get("tag");
+
+  const filtered = useMemo(() => {
+    if (searchTag && variants) {
+      return variants.filter((variant) =>
+        variant.variantTags.some((variantTag) => variantTag.tag === searchTag)
+      );
+    }
+    return variants;
+  }, [searchTag]);
+
   return (
     <main className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-      {variants.map((variant) => (
+      {filtered.map((variant) => (
         <Link
           className="py-2"
           key={variant.id}
