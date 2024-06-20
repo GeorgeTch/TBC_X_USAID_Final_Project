@@ -11,6 +11,7 @@ import { eq } from "drizzle-orm";
 import Stripe from "stripe";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  trustHost: true,
   adapter: DrizzleAdapter(db),
   secret: process.env.AUTH_SECRET,
   session: { strategy: "jwt" },
@@ -19,12 +20,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       const stripe = new Stripe(process.env.STRIPE_SECRET!, {
         apiVersion: "2024-04-10",
       });
-
       const customer = await stripe.customers.create({
         email: user.email!,
         name: user.name!,
       });
-
       await db
         .update(users)
         .set({ customerID: customer.id })
@@ -67,16 +66,15 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return token;
     },
   },
-
   providers: [
     Google({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       allowDangerousEmailAccountLinking: true,
     }),
     Github({
-      clientId: process.env.GITHUB_ID!,
-      clientSecret: process.env.GITHUB_SECRET!,
+      clientId: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET,
       allowDangerousEmailAccountLinking: true,
     }),
     Credentials({
