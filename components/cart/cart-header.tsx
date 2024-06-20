@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { DrawerDescription, DrawerTitle } from "../ui/drawer";
 import { ArrowLeft } from "lucide-react";
 
-export default function CartMessage() {
+export default function CartHeader() {
   const { checkoutProgress, setCheckoutProgress } = useCartStore();
   return (
     <motion.div

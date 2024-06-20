@@ -4,7 +4,6 @@ export default function betweenWeeks(
   endingDate: number
 ) {
   const today = new Date();
-  today.setHours(0, 0, 0, 0);
 
   const startingTargetDate = new Date(today);
   startingTargetDate.setDate(startingTargetDate.getDate() - startingDate);

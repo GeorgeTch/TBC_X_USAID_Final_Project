@@ -1,5 +1,3 @@
-import { date } from "drizzle-orm/pg-core";
-import checkDate from "./check-date";
 import betweenWeeks from "./between-date";
 
 export const monthlyChart = (chartItems: { date: Date; revenue: number }[]) => {
