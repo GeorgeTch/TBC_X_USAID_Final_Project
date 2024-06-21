@@ -251,10 +251,10 @@ export const orderProduct = pgTable("orderProduct", {
   quantity: integer("quantity").notNull(),
   productVariantID: serial("productVariantID")
     .notNull()
-    .references(() => productVariants.id, { onDelete: "cascade" }),
+    .references(() => productVariants.id),
   productID: serial("productID")
     .notNull()
-    .references(() => products.id, { onDelete: "cascade" }),
+    .references(() => products.id),
   orderID: serial("orderID")
     .notNull()
     .references(() => orders.id, { onDelete: "cascade" }),

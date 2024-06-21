@@ -88,10 +88,11 @@ export const ProductVariant = forwardRef<HTMLDivElement, VariantProps>(
 
     const { execute, status } = useAction(createVariant, {
       onExecute() {
-        toast.loading("Creating variant", { duration: 500 });
+        toast.loading("Creating variant");
         setOpen(false);
       },
       onSuccess(data) {
+        toast.dismiss();
         if (data?.error) {
           toast.error(data.error);
         }
@@ -103,10 +104,12 @@ export const ProductVariant = forwardRef<HTMLDivElement, VariantProps>(
 
     const deleteVariantAction = useAction(deleteVariant, {
       onExecute() {
-        toast.loading("Deleting variant", { duration: 500 });
+        toast.loading("Deleting variant");
         setOpen(false);
       },
       onSuccess(data) {
+        toast.dismiss();
+
         if (data?.error) {
           toast.error(data.error);
         }

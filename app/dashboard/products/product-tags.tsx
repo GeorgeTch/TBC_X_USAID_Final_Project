@@ -25,47 +25,47 @@ export default function ProductTags() {
           setFilter("");
         }}
         className={cn(
-          "cursor-pointer hover:opacity-100 bg-primary/80 hover:bg-primary/90",
+          "cursor-pointer hover:opacity-100 py-1",
           !tag ? "opacity-100" : "opacity-50"
         )}
       >
-        All
+        All Categories
       </Badge>
 
       <Badge
         onClick={() => {
-          setFilter("blue");
+          setFilter("bracelet");
         }}
         className={cn(
-          "cursor-pointer hover:opacity-100 bg-blue-500 hover:bg-blue-600",
-          tag && tag === "blue" ? "opacity-100" : "opacity-50"
+          "cursor-pointer hover:opacity-100 py-1",
+          tag && tag === "bracelet" ? "opacity-100" : "opacity-50"
         )}
       >
-        Blue
+        Bracelets
       </Badge>
 
       <Badge
         onClick={() => {
-          setFilter("green");
+          setFilter("ceramic");
         }}
         className={cn(
-          "cursor-pointer hover:opacity-100 bg-green-500 hover:bg-green-600",
-          tag && tag === "green" ? "opacity-100" : "opacity-50"
+          "cursor-pointer hover:opacity-100 py-1 ",
+          tag && tag === "ceramic" ? "opacity-100" : "opacity-50"
         )}
       >
-        Green
+        Ceramics
       </Badge>
 
       <Badge
         onClick={() => {
-          setFilter("purple");
+          setFilter("wallet");
         }}
         className={cn(
-          "cursor-pointer hover:opacity-100 bg-purple-500 hover:bg-purple-600",
-          tag && tag === "purple" ? "opacity-100" : "opacity-50"
+          "cursor-pointer hover:opacity-100 py-1",
+          tag && tag === "wallet" ? "opacity-100" : "opacity-50"
         )}
       >
-        Purple
+        Wallets
       </Badge>
     </div>
   );

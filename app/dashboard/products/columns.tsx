@@ -38,6 +38,7 @@ interface ProductColumn {
 const ActionCell = ({ row }: { row: Row<ProductColumn> }) => {
   const { status, execute } = useAction(deleteProduct, {
     onSuccess: (data) => {
+      toast.dismiss();
       if (data.error) {
         toast.error(data.error);
       }

@@ -6,9 +6,7 @@ import { useFormContext } from "react-hook-form";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
-import { Butcherman } from "next/font/google";
 import { XIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 type InputTagsProps = InputProps & {
   value: string[];
@@ -51,7 +49,10 @@ export const InputTags = forwardRef<HTMLInputElement, InputTagsProps>(
                 <Badge variant={"secondary"}>{tag}</Badge>
                 <button
                   className="w-3 ml-1"
-                  onClick={() => onChange(value.filter((i) => i !== tag))}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onChange(value.filter((i) => i !== tag));
+                  }}
                 >
                   <XIcon className="w-3" />
                 </button>

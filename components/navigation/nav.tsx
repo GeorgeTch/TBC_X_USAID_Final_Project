@@ -14,7 +14,11 @@ export default async function Nav() {
       <nav>
         <ul className="flex justify-between items-center gap-4 md:gap-8">
           <li className="flex-1">
-            <Link href={"/"} aria-label="company logo">
+            <Link
+              className="cursor-default"
+              href={"/"}
+              aria-label="company logo"
+            >
               <Logo />
             </Link>
           </li>

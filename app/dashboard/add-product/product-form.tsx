@@ -69,6 +69,7 @@ export default function ProductForm() {
 
   const { execute, status } = useAction(createProduct, {
     onSuccess: (data) => {
+      toast.dismiss();
       if (data?.success) {
         toast.success(data.success);
         router.push("/dashboard/products");

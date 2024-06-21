@@ -43,6 +43,13 @@
       "when": 1718785383830,
       "tag": "0005_nostalgic_weapon_omega",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1718971122559,
+      "tag": "0006_optimal_star_brand",
+      "breakpoints": true
     }
   ]
 }
