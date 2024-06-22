@@ -8,7 +8,9 @@ const protectedRoutes = [
 
 // Middleware to check for session token
 export async function middleware(req: NextRequest) {
-  const sessionToken = req.cookies.get("authjs.session-token");
+  const sessionToken =
+    req.cookies.get("authjs.session-token") ||
+    req.cookies.get("__Secure-authjs.session-token");
 
   // If session token does not exist and the path is protected, redirect to login page
   if (
