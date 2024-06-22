@@ -74,7 +74,7 @@ export default function ProductShowcase({
                       index === activeThumbnail[0]
                         ? "opacity-100"
                         : "opacity-75",
-                      "rounded-md transition-all duration-300 cursor-pointer hover:opacity-75 ease-in-out"
+                      "rounded-md transition-all duration-200 cursor-pointer hover:opacity-75 ease-in-out"
                     )}
                     width={72}
                     height={48}

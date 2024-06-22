@@ -17,10 +17,20 @@ import Lottie from "lottie-react";
 import emptyCart from "@/public/empty-cart.json";
 import { createId } from "@paralleldrive/cuid2";
 import { Button } from "../ui/button";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function CartItems() {
-  const { cart, addToCart, removeFromCart, setCheckoutProgress } =
-    useCartStore();
+  const {
+    cart,
+    addToCart,
+    removeFromCart,
+    setCheckoutProgress,
+    setCartDrawerOpen,
+  } = useCartStore();
+
+  const session = useSession();
+  const router = useRouter();
 
   const totalPrice = useMemo(() => {
     return cart.reduce((acc, item) => {
@@ -140,7 +150,13 @@ export default function CartItems() {
       </motion.div>
       <Button
         onClick={() => {
-          setCheckoutProgress("payment-page");
+          console.log(session);
+          if (session.status === "unauthenticated") {
+            setCartDrawerOpen(false);
+            router.push("/auth/login");
+          } else {
+            setCheckoutProgress("payment-page");
+          }
         }}
         className="max-w-md w-full"
         disabled={cart.length === 0}

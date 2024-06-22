@@ -11,25 +11,30 @@ const action = createSafeActionClient();
 export const createOrder = action(
   createOrderSchema,
   async ({ products, status, total, paymentIntentID }) => {
-    const user = await auth();
-    if (!user) return { error: "User not found" };
-
-    const order = await db
-      .insert(orders)
-      .values({ status, total, userID: user.user.id, paymentIntentID })
-      .returning();
-
-    const orderProducts = products.map(
-      async ({ productID, quantity, variantID }) => {
-        const newOrderProduct = await db.insert(orderProduct).values({
-          quantity,
-          orderID: order[0].id,
-          productID: productID,
-          productVariantID: variantID,
-        });
+    try {
+      const session = await auth();
+      if (!session) {
+        return { error: "User not found, please sign in" };
       }
-    );
+      const order = await db
+        .insert(orders)
+        .values({ status, total, userID: session.user.id, paymentIntentID })
+        .returning();
 
-    return { success: "Order has been created" };
+      const orderProducts = products.map(
+        async ({ productID, quantity, variantID }) => {
+          const newOrderProduct = await db.insert(orderProduct).values({
+            quantity,
+            orderID: order[0].id,
+            productID: productID,
+            productVariantID: variantID,
+          });
+        }
+      );
+
+      return { success: "Order has been created" };
+    } catch (error) {
+      return { error: JSON.stringify(error) };
+    }
   }
 );

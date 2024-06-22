@@ -5,6 +5,8 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import Toaster from "@/components/ui/toaster";
 import Nav from "@/components/navigation/nav";
+import { auth } from "@/server/auth";
+import { SessionProvider } from "next-auth/react";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -16,22 +18,25 @@ export const metadata: Metadata = {
   description: "Unique Handmade Crafts, Created With Love",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={roboto.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="flex-grow px-6 md:px-12 max-w-8xl mx-auto mt-32">
-            <Nav />
-            <Toaster />
-            {children}
-          </div>
-        </ThemeProvider>
-      </body>
-    </html>
+    <SessionProvider session={session}>
+      <html lang="en" suppressHydrationWarning>
+        <body className={roboto.className}>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <div className="flex-grow px-6 md:px-12 max-w-8xl mx-auto mt-32">
+              <Nav />
+              <Toaster />
+              {children}
+            </div>
+          </ThemeProvider>
+        </body>
+      </html>
+    </SessionProvider>
   );
 }

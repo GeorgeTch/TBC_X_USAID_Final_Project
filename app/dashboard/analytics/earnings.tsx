@@ -44,15 +44,13 @@ export default function Earnings({
 
   const activeTotal = useMemo(() => {
     if (filter === "week") {
-      return weeklyChart(chartItems).reduce(
-        (acc, item) => acc + item.revenue,
-        0
-      );
+      return weeklyChart(chartItems)
+        .reduce((acc, item) => acc + item.revenue, 0)
+        .toFixed(2);
     }
-    return monthlyChart(chartItems).reduce(
-      (acc, item) => acc + item.revenue,
-      0
-    );
+    return monthlyChart(chartItems)
+      .reduce((acc, item) => acc + item.revenue, 0)
+      .toFixed(2);
   }, [filter]);
 
   return (

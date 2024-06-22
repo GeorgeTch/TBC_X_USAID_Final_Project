@@ -17,7 +17,7 @@ export const addReview = action(
     try {
       const session = await auth();
       if (!session) {
-        return { error: "Please sign in" };
+        return { error: "Please sign in to add a review" };
       }
 
       const reviewExists = await db.query.reviews.findFirst({
