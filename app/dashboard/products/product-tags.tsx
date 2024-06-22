@@ -19,13 +19,13 @@ export default function ProductTags() {
     }
   };
   return (
-    <div className="my-4 flex gap-4 justify-center items-center">
+    <div className="my-10 flex gap-4 justify-center items-center">
       <Badge
         onClick={() => {
           setFilter("");
         }}
         className={cn(
-          "cursor-pointer hover:opacity-100 py-1",
+          "cursor-pointer hover:opacity-100 py-1 transition-all duration-300 ease-in-out text-nowrap",
           !tag ? "opacity-100" : "opacity-50"
         )}
       >
@@ -37,7 +37,7 @@ export default function ProductTags() {
           setFilter("bracelet");
         }}
         className={cn(
-          "cursor-pointer hover:opacity-100 py-1",
+          "cursor-pointer hover:opacity-100 py-1 transition-all duration-300 ease-in-out",
           tag && tag === "bracelet" ? "opacity-100" : "opacity-50"
         )}
       >
@@ -49,7 +49,7 @@ export default function ProductTags() {
           setFilter("ceramic");
         }}
         className={cn(
-          "cursor-pointer hover:opacity-100 py-1 ",
+          "cursor-pointer hover:opacity-100 py-1 transition-all duration-300 ease-in-out",
           tag && tag === "ceramic" ? "opacity-100" : "opacity-50"
         )}
       >
@@ -61,7 +61,7 @@ export default function ProductTags() {
           setFilter("wallet");
         }}
         className={cn(
-          "cursor-pointer hover:opacity-100 py-1",
+          "cursor-pointer hover:opacity-100 py-1 transition-all duration-300 ease-in-out",
           tag && tag === "wallet" ? "opacity-100" : "opacity-50"
         )}
       >

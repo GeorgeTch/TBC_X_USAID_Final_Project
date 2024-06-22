@@ -120,7 +120,7 @@ export default function SettingsCard({ session }: { session: Session }) {
                       />
                     )}
                     <UploadButton
-                      className="scale-75   ut-label:bg-red-50  ut-button:bg-default/75  hover:ut-button:bg-primary-foreground ut:button:transition-all ut-button:duration-500 "
+                      className="scale-75 text-secondary-foreground  ut-label:text-primary  ut-button:bg-primary/75  hover:ut-button:bg-primary-foreground ut:button:transition-all ut-button:duration-500 ease-out"
                       endpoint="avatarUploader"
                       onUploadBegin={() => {
                         setAvatarUploading(true);

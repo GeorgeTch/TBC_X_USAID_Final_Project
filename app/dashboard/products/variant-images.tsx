@@ -98,7 +98,7 @@ export default function VariantImages() {
       />
       <div className="rounded-md overflow-x-auto">
         <Table>
-          <TableCaption>A list of your recent invoices.</TableCaption>
+          <TableCaption>A list of your recent products.</TableCaption>
           <TableHeader>
             <TableRow>
               <TableHead>Order</TableHead>

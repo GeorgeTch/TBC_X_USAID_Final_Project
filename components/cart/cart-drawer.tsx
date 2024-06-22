@@ -15,10 +15,17 @@ import Payment from "./payment";
 import OrderConfirmed from "./order-confirmed";
 import CartHeader from "./cart-header";
 import CartProgress from "./cart-progress";
+import { useMemo } from "react";
 
 export default function CartDrawer() {
   const { cart, checkoutProgress, cartDrawerOpen, setCartDrawerOpen } =
     useCartStore();
+
+  const totalQuantity = useMemo(() => {
+    return cart.reduce((acc, item) => {
+      return acc + item.variant.quantity;
+    }, 0);
+  }, [cart]);
 
   return (
     <Drawer open={cartDrawerOpen} onOpenChange={setCartDrawerOpen}>
@@ -30,9 +37,9 @@ export default function CartDrawer() {
                 animate={{ scale: 1, opacity: 1 }}
                 initial={{ scale: 0, opacity: 0 }}
                 exit={{ scale: 0 }}
-                className="flex items-center justify-center absolute -top-1 -right-0.5 w-4 h-4 bg-primary text-secondary  dark:bg-primary text-xs font-bold rounded-full"
+                className="flex items-center justify-center absolute -top-1 -right-0.5 w-5 h-4 bg-primary text-secondary  dark:bg-primary text-xs font-bold rounded-full"
               >
-                {cart.length}
+                {totalQuantity}
               </motion.span>
             )}
           </AnimatePresence>
