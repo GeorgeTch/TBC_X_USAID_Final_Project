@@ -34,7 +34,6 @@ export default async function RootLayout({
               <Nav />
               <Toaster />
               {children}
-              <Footer />
             </div>
           </ThemeProvider>
         </body>

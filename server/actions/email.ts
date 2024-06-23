@@ -9,7 +9,7 @@ const domain = getBaseUrl();
 export const sendVerificationEmail = async (email: string, token: string) => {
   const confirmLink = `${domain}/auth/new-verification?token=${token}`;
   const { data, error } = await resend.emails.send({
-    from: "Handmade Georgia <handmadegeorgia@resend.dev>",
+    from: "Handmade Georgia <hello@handmadegeorgia.store>",
     to: email,
     subject: "Handmadegeorgia.store - Confirmation Email",
     html: `<p>Click to <a href=${confirmLink}> confirm your email </a></p>`,
@@ -28,7 +28,7 @@ export const sendVerificationEmail = async (email: string, token: string) => {
 export const sendPasswordResetEmail = async (email: string, token: string) => {
   const confirmLink = `${domain}/auth/new-password?token=${token}`;
   const { data, error } = await resend.emails.send({
-    from: "Handmade Georgia <handmadegeorgia@resend.dev>",
+    from: "Handmade Georgia <hello@handmadegeorgia.store>",
     to: email,
     subject: "Handmadegeorgia.store - Confirmation Email",
     html: `<p>Click to <a href=${confirmLink}> Reset your password</a></p>`,
@@ -46,7 +46,7 @@ export const sendPasswordResetEmail = async (email: string, token: string) => {
 
 export const sendTwoFactorTokenEmail = async (email: string, token: string) => {
   const { data, error } = await resend.emails.send({
-    from: "Handmade Georgia <handmadegeorgia@resend.dev>",
+    from: "Handmade Georgia <hello@handmadegeorgia.store>",
     to: email,
     subject: "Handmadegeorgia.store - Confirmation Email",
     html: `<p>Your Confirmation Code: ${token}</p>`,

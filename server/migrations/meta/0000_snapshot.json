@@ -1,5 +1,5 @@
 {
-  "id": "9144393f-4667-4f82-b380-a9c5ae55543a",
+  "id": "b160b417-e5a1-406a-9cae-bc99534ed163",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -142,6 +142,153 @@
           ]
         }
       },
+      "uniqueConstraints": {}
+    },
+    "public.orderProduct": {
+      "name": "orderProduct",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "quantity": {
+          "name": "quantity",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "productVariantID": {
+          "name": "productVariantID",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "productID": {
+          "name": "productID",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "orderID": {
+          "name": "orderID",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "orderProduct_productVariantID_productVariants_id_fk": {
+          "name": "orderProduct_productVariantID_productVariants_id_fk",
+          "tableFrom": "orderProduct",
+          "tableTo": "productVariants",
+          "columnsFrom": [
+            "productVariantID"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "orderProduct_productID_products_id_fk": {
+          "name": "orderProduct_productID_products_id_fk",
+          "tableFrom": "orderProduct",
+          "tableTo": "products",
+          "columnsFrom": [
+            "productID"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "orderProduct_orderID_orders_id_fk": {
+          "name": "orderProduct_orderID_orders_id_fk",
+          "tableFrom": "orderProduct",
+          "tableTo": "orders",
+          "columnsFrom": [
+            "orderID"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.orders": {
+      "name": "orders",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "userID": {
+          "name": "userID",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "total": {
+          "name": "total",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status": {
+          "name": "status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created": {
+          "name": "created",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "receiptURL": {
+          "name": "receiptURL",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "paymentIntentID": {
+          "name": "paymentIntentID",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "orders_userID_user_id_fk": {
+          "name": "orders_userID_user_id_fk",
+          "tableFrom": "orders",
+          "tableTo": "user",
+          "columnsFrom": [
+            "userID"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
     "public.password_reset_tokens": {
@@ -472,6 +619,12 @@
           "primaryKey": false,
           "notNull": false,
           "default": "'user'"
+        },
+        "customerID": {
+          "name": "customerID",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},

@@ -52,7 +52,7 @@ export default function AddToCart() {
       </div>
       <Button
         onClick={() => {
-          toast.success(`Added ${title + " " + type} to your cart`);
+          toast.success(`Added ${title + " "} to your cart`);
           addToCart({
             id: productID,
             name: title + " " + type,
