@@ -7,19 +7,28 @@ import {
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { createPaymentIntent } from "@/server/actions/create-payment-intent";
 import { useAction } from "next-safe-action/hooks";
 import { createOrder } from "@/server/actions/create-order";
 import { toast } from "sonner";
+import { useSession } from "next-auth/react";
 
 export default function PaymentForm({ totalPrice }: { totalPrice: number }) {
   const stripe = useStripe();
   const elements = useElements();
-  const { cart, setCheckoutProgress, clearCart } = useCartStore();
+  const { cart, setCheckoutProgress, clearCart, setCartDrawerOpen } =
+    useCartStore();
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  const session = useSession();
+  useEffect(() => {
+    if (session.status === "unauthenticated") {
+      setCheckoutProgress("cart-page");
+    }
+  }, []);
 
   const { execute } = useAction(createOrder, {
     onSuccess: (data) => {

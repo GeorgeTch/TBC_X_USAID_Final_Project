@@ -50,6 +50,13 @@
       "when": 1718971122559,
       "tag": "0006_optimal_star_brand",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1719147435430,
+      "tag": "0007_stiff_callisto",
+      "breakpoints": true
     }
   ]
 }

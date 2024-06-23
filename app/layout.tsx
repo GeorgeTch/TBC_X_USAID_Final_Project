@@ -7,6 +7,7 @@ import Toaster from "@/components/ui/toaster";
 import Nav from "@/components/navigation/nav";
 import { auth } from "@/server/auth";
 import { SessionProvider } from "next-auth/react";
+import Footer from "@/components/footer/Footer";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -29,10 +30,11 @@ export default async function RootLayout({
       <html lang="en" suppressHydrationWarning>
         <body className={roboto.className}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <div className="flex-grow px-6 md:px-12 max-w-8xl mx-auto mt-32">
+            <div className="flex flex-col justify-between px-6 md:px-12 max-w-8xl mx-auto mt-32">
               <Nav />
               <Toaster />
               {children}
+              <Footer />
             </div>
           </ThemeProvider>
         </body>

@@ -22,13 +22,13 @@ export default async function Nav() {
               <Logo />
             </Link>
           </li>
-          <li className="flex items-center relative  hover:scale-110 transition-all duration-500 ease-in-out">
+          <li className="flex items-center relative  hover:scale-110 transition-all duration-700 ease-in-out">
             <CartDrawer />
           </li>
           {!session ? (
-            <li className="flex items-center justify-center">
+            <li className="flex items-center justify-center hover:scale-105 transition-all duration-700 ease-in-out">
               <Button asChild>
-                <Link className="flex gap-2" href="/auth/login">
+                <Link className="flex gap-2 " href="/auth/login">
                   <LogIn size={16}></LogIn>
                   <span>Log In</span>
                 </Link>

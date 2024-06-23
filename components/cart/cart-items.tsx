@@ -1,7 +1,7 @@
 "use client";
 
 import { useCartStore } from "@/lib/client-store";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import {
   Table,
   TableBody,
@@ -19,6 +19,7 @@ import { createId } from "@paralleldrive/cuid2";
 import { Button } from "../ui/button";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useCurrentSession } from "@/hooks/useCurrentSession";
 
 export default function CartItems() {
   const {
@@ -29,8 +30,19 @@ export default function CartItems() {
     setCartDrawerOpen,
   } = useCartStore();
 
-  const session = useSession();
   const router = useRouter();
+  const { session, status } = useCurrentSession();
+
+  const handleCheckout = () => {
+    console.log("Session status:", status);
+    if (status === "unauthenticated") {
+      setCartDrawerOpen(false);
+      router.push("/auth/login");
+    } else {
+      console.log("Proceeding to payment page", session);
+      setCheckoutProgress("payment-page");
+    }
+  };
 
   const totalPrice = useMemo(() => {
     return cart.reduce((acc, item) => {
@@ -150,13 +162,7 @@ export default function CartItems() {
       </motion.div>
       <Button
         onClick={() => {
-          console.log(session);
-          if (session.status === "unauthenticated") {
-            setCartDrawerOpen(false);
-            router.push("/auth/login");
-          } else {
-            setCheckoutProgress("payment-page");
-          }
+          handleCheckout();
         }}
         className="max-w-md w-full"
         disabled={cart.length === 0}

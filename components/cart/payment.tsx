@@ -26,7 +26,14 @@ export default function Payment() {
           mode: "payment",
           currency: "usd",
           amount: totalPrice * 100,
-          appearance: { theme: theme === "dark" ? "night" : "flat" },
+          appearance: {
+            theme: theme === "dark" ? "night" : "flat",
+            rules: {
+              ".Label": {
+                color: theme === "dark" ? "#fff" : "#000", // Label text color
+              },
+            },
+          },
         }}
       >
         <PaymentForm totalPrice={totalPrice} />

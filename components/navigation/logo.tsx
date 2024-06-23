@@ -4,7 +4,7 @@ import logo from "@/public/logo.png";
 export default function Logo() {
   return (
     <svg
-      className="bg-slate-50 hover:bg-slate-200 cursor-pointer w-36 h-14 rounded-md  hover:scale-105 transition-all duration-500 ease-in-out" // Increase width and height
+      className="bg-slate-50 hover:bg-slate-200 cursor-pointer w-36 h-14 rounded-md  hover:scale-105 transition-all duration-700 ease-in-out" // Increase width and height
       version="1.0"
       xmlns="http://www.w3.org/2000/svg"
       width="500.000000pt" // Double the original width
