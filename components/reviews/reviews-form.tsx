@@ -30,6 +30,7 @@ import { cn } from "@/lib/utils";
 import { useAction } from "next-safe-action/hooks";
 import { addReview } from "@/server/actions/add-review";
 import { toast } from "sonner";
+import { revalidatePath } from "next/cache";
 
 export default function ReviewsForm() {
   const params = useSearchParams();
@@ -52,6 +53,7 @@ export default function ReviewsForm() {
       if (success) {
         toast.success("Review Added");
         form.reset();
+        revalidatePath(`/products/${productID}`);
       }
     },
   });

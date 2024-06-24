@@ -172,14 +172,25 @@ export default function SettingsCard({ session }: { session: Session }) {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>Current Password</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="********"
                       disabled={
                         status === "executing" || session.user.isOAuth === true
                       }
-                      {...field}
+                      type="password"
+                      placeholder="********"
+                      value={field.value || ""} // Ensure input is always controlled
+                      onChange={(e) => {
+                        if (
+                          !(
+                            status === "executing" ||
+                            session.user.isOAuth === true
+                          )
+                        ) {
+                          field.onChange(e);
+                        }
+                      }}
                     />
                   </FormControl>
                   <FormMessage />
@@ -195,11 +206,22 @@ export default function SettingsCard({ session }: { session: Session }) {
                   <FormLabel>New Password</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="********"
                       disabled={
                         status === "executing" || session.user.isOAuth === true
                       }
-                      {...field}
+                      type="password"
+                      placeholder="********"
+                      value={field.value || ""} // Ensure input is always controlled
+                      onChange={(e) => {
+                        if (
+                          !(
+                            status === "executing" ||
+                            session.user.isOAuth === true
+                          )
+                        ) {
+                          field.onChange(e);
+                        }
+                      }}
                     />
                   </FormControl>
                   <FormMessage />
@@ -212,7 +234,7 @@ export default function SettingsCard({ session }: { session: Session }) {
               name="isTwoFactorEnabled"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>New Password</FormLabel>
+                  <FormLabel>2 Factor Authentication</FormLabel>
                   <FormDescription>
                     Enable two factor authentication for your account
                   </FormDescription>

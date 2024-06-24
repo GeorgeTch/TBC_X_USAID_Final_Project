@@ -130,7 +130,7 @@ export default async function OrderPage() {
                         )}
                       </DropdownMenuContent>
                     </DropdownMenu>
-                    <DialogContent className="rounded-md">
+                    <DialogContent className="rounded-md p-4 max-w-full max-h-full w-full h-full md:max-w-3xl md:max-h-90vh overflow-auto">
                       <DialogHeader>
                         <DialogTitle>Order Details #{order.id}</DialogTitle>
                         <DialogDescription>

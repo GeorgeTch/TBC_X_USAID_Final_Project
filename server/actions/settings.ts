@@ -38,7 +38,7 @@ export const settings = action(SettingsSchema, async (values) => {
       dbUser.password
     );
     if (!passwordMatch) {
-      return { error: "Password does not match" };
+      return { error: "Provided password is not correct" };
     }
 
     const samePassword = await bcrypt.compare(
