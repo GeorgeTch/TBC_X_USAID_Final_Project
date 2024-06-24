@@ -68,6 +68,7 @@ export default function PaymentForm({ totalPrice }: { totalPrice: number }) {
       cart: cart.map((item) => ({
         quantity: item.variant.quantity,
         productID: item.id,
+        variantID: item.variant.variantID,
         title: item.name,
         price: item.price,
         image: item.image,

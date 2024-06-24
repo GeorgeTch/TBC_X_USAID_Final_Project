@@ -7,6 +7,7 @@ export const paymentIntentSchema = z.object({
     z.object({
       quantity: z.number(),
       productID: z.number(),
+      variantID: z.number(),
       title: z.string(),
       price: z.number(),
       image: z.string(),

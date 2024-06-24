@@ -14,19 +14,33 @@ export const createPaymentIntent = action(
     if (!user) return { error: "Please login to continue" };
     if (!amount) return { error: "No items to checkout" };
 
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount,
-      currency,
-      automatic_payment_methods: { enabled: true },
-      metadata: { cart: JSON.stringify(cart) },
-    });
+    // Simplify the cart data to reduce metadata size
+    const simplifiedCart = cart.map((item) => ({
+      id: item.productID,
+      qty: item.quantity,
+      variant: item.variantID,
+    }));
 
-    return {
-      success: {
-        paymentIntentID: paymentIntent.id,
-        clientSecretID: paymentIntent.client_secret,
-        user: user.user.email,
-      },
-    };
+    try {
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount,
+        currency,
+        automatic_payment_methods: { enabled: true },
+        metadata: {
+          cart: JSON.stringify(simplifiedCart).slice(0, 500), // Ensure it doesn't exceed 500 characters
+        },
+      });
+
+      return {
+        success: {
+          paymentIntentID: paymentIntent.id,
+          clientSecretID: paymentIntent.client_secret,
+          user: user.user.email,
+        },
+      };
+    } catch (error) {
+      console.error("Error creating payment intent:", error);
+      return { error: "Failed to create payment intent" };
+    }
   }
 );
