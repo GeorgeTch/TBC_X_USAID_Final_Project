@@ -10,7 +10,7 @@ export default async function Nav() {
   const session = await auth();
   const expires = session?.expires ?? new Date().toISOString();
   return (
-    <header className="py-4 px-12 rounded-b-3xl sm:rounded-b-full fixed top-0 left-0 w-full z-10 bg-primary-foreground opacity-90">
+    <header className="p-4 sm:px-12 rounded-b-3xl sm:rounded-b-full fixed top-0 left-0 w-full z-10 bg-primary-foreground opacity-90">
       <nav>
         <ul className="flex justify-between items-center gap-4 md:gap-8">
           <li className="flex-1">

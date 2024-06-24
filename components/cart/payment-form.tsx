@@ -60,8 +60,10 @@ export default function PaymentForm({ totalPrice }: { totalPrice: number }) {
       return;
     }
 
+    const amountInCents = Math.round(totalPrice * 100);
+
     const { data } = await createPaymentIntent({
-      amount: totalPrice * 100,
+      amount: amountInCents,
       currency: "usd",
       cart: cart.map((item) => ({
         quantity: item.variant.quantity,

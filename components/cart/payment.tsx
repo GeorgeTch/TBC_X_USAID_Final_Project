@@ -18,6 +18,8 @@ export default function Payment() {
     return acc + item.price * item.variant.quantity;
   }, 0);
 
+  const amountInCents = Math.round(totalPrice * 100);
+
   return (
     <motion.div className="max-w-2xl mx-auto">
       <Elements
@@ -25,7 +27,7 @@ export default function Payment() {
         options={{
           mode: "payment",
           currency: "usd",
-          amount: totalPrice * 100,
+          amount: amountInCents,
           appearance: {
             theme: theme === "dark" ? "night" : "flat",
             rules: {

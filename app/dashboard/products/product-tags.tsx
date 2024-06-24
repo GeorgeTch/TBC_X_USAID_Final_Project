@@ -19,7 +19,7 @@ export default function ProductTags() {
     }
   };
   return (
-    <div className="my-10 flex gap-4 justify-center items-center">
+    <div className="my-10 flex gap-2 sm:gap-4 justify-center items-center">
       <Badge
         onClick={() => {
           setFilter("");
