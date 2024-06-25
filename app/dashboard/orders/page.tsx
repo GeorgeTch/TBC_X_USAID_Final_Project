@@ -42,14 +42,16 @@ import { Button } from "@/components/ui/button";
 import { Ghost, MoreHorizontal } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { use } from "react";
 
 export default async function OrderPage() {
-  const user = await auth();
-  if (!user) {
+  const session = await auth();
+  if (!session) {
     redirect("/auth/login");
   }
+
   const userOrders = await db.query.orders.findMany({
-    where: eq(orders.userID, user.user.id),
+    where: eq(orders.userID, session.user.id),
     with: {
       orderProduct: {
         with: {
