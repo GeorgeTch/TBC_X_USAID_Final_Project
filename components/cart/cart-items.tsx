@@ -26,6 +26,7 @@ export default function CartItems() {
     cart,
     addToCart,
     removeFromCart,
+    checkoutProgress,
     setCheckoutProgress,
     setCartDrawerOpen,
   } = useCartStore();

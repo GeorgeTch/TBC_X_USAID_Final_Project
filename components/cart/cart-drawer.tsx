@@ -15,11 +15,22 @@ import Payment from "./payment";
 import OrderConfirmed from "./order-confirmed";
 import CartHeader from "./cart-header";
 import CartProgress from "./cart-progress";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
 export default function CartDrawer() {
-  const { cart, checkoutProgress, cartDrawerOpen, setCartDrawerOpen } =
-    useCartStore();
+  const {
+    cart,
+    checkoutProgress,
+    setCheckoutProgress,
+    cartDrawerOpen,
+    setCartDrawerOpen,
+  } = useCartStore();
+
+  useEffect(() => {
+    if (checkoutProgress !== "cart-page" && cart.length > 0) {
+      setCheckoutProgress("cart-page");
+    }
+  }, [cart]);
 
   const totalQuantity = useMemo(() => {
     return cart.reduce((acc, item) => {
